@@ -1,0 +1,32 @@
+[project]
+name = "mlb-standints-app"
+version = "0.1.0"
+description = "A Streamlit app that shows MLB standings and how teams rank in other divisions"
+authors = [
+    { name = "Caleb Cherry", email = "calebcherry@gmail.com"}
+    ]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "streamlit",
+    "pandas",
+    "httpx", # for async API calls
+    "python-dotenv", # for managing API keys or env vars if needed
+    "ipykernel>=6.29.5",
+]
+
+[tool.uv.pip]
+# Optional section for pip-style requirements fallback
+# Can be used by tools that don’t yet support PEP 621 fully
+
+
+[tool.uv]
+virtualenvs.in-project = true
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "ruff",         # linter
+    "pytest",
+    "ipython"
+]
