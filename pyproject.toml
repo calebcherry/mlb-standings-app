@@ -13,6 +13,7 @@ dependencies = [
     "httpx", # for async API calls
     "python-dotenv", # for managing API keys or env vars if needed
     "ipykernel>=6.29.5",
+    "pybaseball>=2.2.7",
 ]
 
 [tool.uv.pip]

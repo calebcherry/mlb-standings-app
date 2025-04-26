@@ -57,6 +57,7 @@ This app makes that kind of hot take visual and interactive.
 ## 🚧 Roadmap
 
 - [ ] Add historical standings
+- [ ] Add Index (json) of all League, Division, and Team metadata, sources (img links), etc.
 - [ ] Add non-traditional team season stats (like series wins, division h2h, etc)
 - [ ] Add charts for better visual comparison
 - [ ] Team filtering & views
