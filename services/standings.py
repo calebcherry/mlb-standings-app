@@ -3,14 +3,17 @@ import httpx
 import pybaseball
 
 def fetch_mlb_standings():
-    url = "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/standings"
+    url = "https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2025&standingsTypes=regularSeason"
     response = httpx.get(url)
-    response.raise_for_status()  # Raise an error for bad responses
+    response.raise_for_status()
     return response.json()
 
 
 # TODO: Write code to parse the standings data
 def parse_standings(raw_data):
+    if "records" not in raw_data:
+        raise ValueError("Invalid data format: 'records' key not found in API response.")
+
     teams = []
     for div in raw_data["records"]:
         division_id = div['division']['id']

@@ -1,9 +1,16 @@
+import sys
+import os
+
+# Add the project root directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import streamlit as st
-from services.standings import get_standings_with_cross_division_ranks
+from services.standings import fetch_mlb_standings, parse_standings, cross_division_ranks, get_div_leader
 
-st.set_page_config(page_title="MLB Standings Viewer", layout="wide")
-st.title("🏟️ MLB Standings + Cross-Division Rankings")
+# Title
+st.title("⚾️ MLB Standings + Cross-Division Rankings 🏟️")
 
+# Description
 st.markdown(
     """
     This tool shows current MLB standings and where each team would rank in other divisions.  
@@ -11,16 +18,16 @@ st.markdown(
     """
 )
 
-standings_df = get_standings_with_cross_division_ranks()
+# Fetch & process data
+with st.spinner("Fetching MLB standings..."):
+    raw_data = fetch_mlb_standings()
+    # st.json(raw_data)
+    standings_df = parse_standings(raw_data)
+    ranked_df = cross_division_ranks(standings_df)
 
-st.dataframe(standings_df, use_container_width=True)
+# Display the dataframe/standings
+st.subheader("📈 Standings and Cross-Division Rankings")
+st.dataframe(ranked_df, use_container_width=True)
 
 
-
-
-# def main():
-#     print("Hello from mlb-standints-app!")
-
-
-# if __name__ == "__main__":
-#     main()
+# TODO: add a visual on the page that shows when the standings are updated and the last time the data was fetched/most recent game played
